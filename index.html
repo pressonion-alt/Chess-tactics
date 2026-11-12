@@ -143,6 +143,10 @@ main {
 .square.drag-origin img { opacity:.18; }
 
 .square img {
+    -webkit-user-drag:none;
+    user-select:none;
+    -webkit-user-select:none;
+    pointer-events:none;
     width:112.8%;
     height:112.8%;
     object-fit:contain;
@@ -797,6 +801,10 @@ function runMoveAnimation(data) {
 function afterMove(move, animate = true) {
     const animation = animate ? prepareMoveAnimation(move) : null;
 
+    // Clear every annotation arrow as soon as any move is played.
+    arrows = [];
+    arrowStart = null;
+
     lastMove = {
         from:move.from,
         to:move.to
@@ -1439,6 +1447,15 @@ board.addEventListener("click", event => {
 }, true);
 
 board.addEventListener("contextmenu", event => event.preventDefault());
+
+// Stop the browser's native image drag preview (which can look like the
+// entire dragged PNG/photo is being carried instead of the chess piece).
+// All piece movement is handled by the custom pointer-drag code above.
+document.addEventListener("dragstart", event => {
+    if (event.target instanceof Element && event.target.closest("#board")) {
+        event.preventDefault();
+    }
+}, true);
 
 function drawArrows() {
     const layer = document.getElementById("arrowLayer");
