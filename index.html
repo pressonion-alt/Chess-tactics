@@ -1,7 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chess Tactics</title>
@@ -142,12 +139,26 @@ main {
 .square.premove-selected { background:#78a9d8!important; }
 
 .square img {
-    width:88%;
-    height:88%;
+    width:94%;
+    height:94%;
     object-fit:contain;
     z-index:2;
     pointer-events:none;
     -webkit-user-drag:none;
+    image-rendering:auto;
+    transform:translateZ(0);
+    backface-visibility:hidden;
+    filter:drop-shadow(0 1px 1px #0002);
+}
+
+.moving-piece {
+    position:absolute;
+    z-index:8;
+    pointer-events:none;
+    object-fit:contain;
+    will-change:transform;
+    transition:transform 280ms cubic-bezier(.2,.75,.25,1);
+    filter:drop-shadow(0 3px 4px #0005);
 }
 
 .square.legal::after {
@@ -381,14 +392,12 @@ select { min-width:125px; padding:8px; }
     </div>
 
     <div class="board-wrap">
-        <div id="board"></div>
+        <div id="board"><div class="square light" data-square="a8" draggable="true"><span class="coordinate rank">8</span><span class="coordinate file">a</span><img src="BRook.png" alt="br" draggable="false" style="display: none;"></div><div class="square dark" data-square="b8" draggable="true"><span class="coordinate file">b</span><img src="BHorse.png" alt="bn" draggable="false" style="display: none;"></div><div class="square light" data-square="c8" draggable="true"><span class="coordinate file">c</span><img src="BBishop.png" alt="bb" draggable="false" style="display: none;"></div><div class="square dark" data-square="d8" draggable="true"><span class="coordinate file">d</span><img src="BQueen.png" alt="bq" draggable="false" style="display: none;"></div><div class="square light" data-square="e8" draggable="true"><span class="coordinate file">e</span><img src="Bking.png" alt="bk" draggable="false" style="display: none;"></div><div class="square dark" data-square="f8" draggable="true"><span class="coordinate file">f</span><img src="BBishop.png" alt="bb" draggable="false" style="display: none;"></div><div class="square light" data-square="g8" draggable="true"><span class="coordinate file">g</span><img src="BHorse.png" alt="bn" draggable="false" style="display: none;"></div><div class="square dark" data-square="h8" draggable="true"><span class="coordinate file">h</span><img src="BRook.png" alt="br" draggable="false" style="display: none;"></div><div class="square dark" data-square="a7" draggable="true"><span class="coordinate rank">7</span><img src="BPawn.png" alt="bp" draggable="false" style="display: none;"></div><div class="square light" data-square="b7" draggable="true"><img src="BPawn.png" alt="bp" draggable="false" style="display: none;"></div><div class="square dark" data-square="c7" draggable="true"><img src="BPawn.png" alt="bp" draggable="false" style="display: none;"></div><div class="square light" data-square="d7" draggable="true"><img src="BPawn.png" alt="bp" draggable="false" style="display: none;"></div><div class="square dark" data-square="e7" draggable="true"><img src="BPawn.png" alt="bp" draggable="false" style="display: none;"></div><div class="square light" data-square="f7" draggable="true"><img src="BPawn.png" alt="bp" draggable="false" style="display: none;"></div><div class="square dark" data-square="g7" draggable="true"><img src="BPawn.png" alt="bp" draggable="false" style="display: none;"></div><div class="square light" data-square="h7" draggable="true"><img src="BPawn.png" alt="bp" draggable="false" style="display: none;"></div><div class="square light" data-square="a6" draggable="false"><span class="coordinate rank">6</span></div><div class="square dark" data-square="b6" draggable="false"></div><div class="square light" data-square="c6" draggable="false"></div><div class="square dark" data-square="d6" draggable="false"></div><div class="square light" data-square="e6" draggable="false"></div><div class="square dark" data-square="f6" draggable="false"></div><div class="square light" data-square="g6" draggable="false"></div><div class="square dark" data-square="h6" draggable="false"></div><div class="square dark" data-square="a5" draggable="false"><span class="coordinate rank">5</span></div><div class="square light" data-square="b5" draggable="false"></div><div class="square dark" data-square="c5" draggable="false"></div><div class="square light" data-square="d5" draggable="false"></div><div class="square dark" data-square="e5" draggable="false"></div><div class="square light" data-square="f5" draggable="false"></div><div class="square dark" data-square="g5" draggable="false"></div><div class="square light" data-square="h5" draggable="false"></div><div class="square light" data-square="a4" draggable="false"><span class="coordinate rank">4</span></div><div class="square dark" data-square="b4" draggable="false"></div><div class="square light" data-square="c4" draggable="false"></div><div class="square dark" data-square="d4" draggable="false"></div><div class="square light" data-square="e4" draggable="false"></div><div class="square dark" data-square="f4" draggable="false"></div><div class="square light" data-square="g4" draggable="false"></div><div class="square dark" data-square="h4" draggable="false"></div><div class="square dark" data-square="a3" draggable="false"><span class="coordinate rank">3</span></div><div class="square light" data-square="b3" draggable="false"></div><div class="square dark" data-square="c3" draggable="false"></div><div class="square light" data-square="d3" draggable="false"></div><div class="square dark" data-square="e3" draggable="false"></div><div class="square light" data-square="f3" draggable="false"></div><div class="square dark" data-square="g3" draggable="false"></div><div class="square light" data-square="h3" draggable="false"></div><div class="square light" data-square="a2" draggable="true"><span class="coordinate rank">2</span><img src="WPawn.png" alt="wp" draggable="false" style="display: none;"></div><div class="square dark" data-square="b2" draggable="true"><img src="WPawn.png" alt="wp" draggable="false" style="display: none;"></div><div class="square light" data-square="c2" draggable="true"><img src="WPawn.png" alt="wp" draggable="false" style="display: none;"></div><div class="square dark" data-square="d2" draggable="true"><img src="WPawn.png" alt="wp" draggable="false" style="display: none;"></div><div class="square light" data-square="e2" draggable="true"><img src="WPawn.png" alt="wp" draggable="false" style="display: none;"></div><div class="square dark" data-square="f2" draggable="true"><img src="WPawn.png" alt="wp" draggable="false" style="display: none;"></div><div class="square light" data-square="g2" draggable="true"><img src="WPawn.png" alt="wp" draggable="false" style="display: none;"></div><div class="square dark" data-square="h2" draggable="true"><img src="WPawn.png" alt="wp" draggable="false" style="display: none;"></div><div class="square dark" data-square="a1" draggable="true"><span class="coordinate rank">1</span><img src="WRook.png" alt="wr" draggable="false" style="display: none;"></div><div class="square light" data-square="b1" draggable="true"><img src="WHorse.png" alt="wn" draggable="false" style="display: none;"></div><div class="square dark" data-square="c1" draggable="true"><img src="WBishop.png" alt="wb" draggable="false" style="display: none;"></div><div class="square light" data-square="d1" draggable="true"><img src="WQueen.png" alt="wq" draggable="false" style="display: none;"></div><div class="square dark" data-square="e1" draggable="true"><img src="Wking.png" alt="wk" draggable="false" style="display: none;"></div><div class="square light" data-square="f1" draggable="true"><img src="WBishop.png" alt="wb" draggable="false" style="display: none;"></div><div class="square dark" data-square="g1" draggable="true"><img src="WHorse.png" alt="wn" draggable="false" style="display: none;"></div><div class="square light" data-square="h1" draggable="true"><img src="WRook.png" alt="wr" draggable="false" style="display: none;"></div></div>
 
         <svg id="arrows" viewBox="0 0 800 800" preserveAspectRatio="none">
             <defs>
-                <marker id="arrowHead" markerWidth="7" markerHeight="7"
-                    refX="5" refY="3" orient="auto">
-                    <path d="M0,0 L6,3 L0,6" fill="none"
-                        stroke="#e9d84b" stroke-width="1.5"/>
+                <marker id="arrowHead" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+                    <path d="M0,0 L6,3 L0,6" fill="none" stroke="#e9d84b" stroke-width="1.5"></path>
                 </marker>
             </defs>
             <g id="arrowLayer"></g>
@@ -413,7 +422,7 @@ select { min-width:125px; padding:8px; }
             <div class="player-name">You</div>
             <div class="player-detail" id="whiteDetail">You · White</div>
         </div>
-        <div class="turn-indicator" id="whiteIndicator"></div>
+        <div class="turn-indicator active" id="whiteIndicator"></div>
     </div>
 
 </section>
@@ -421,9 +430,7 @@ select { min-width:125px; padding:8px; }
 <aside class="side-panel">
     <div class="panel-heading">Game Controls</div>
 
-    <div class="status" id="status">
-        <strong>Your move.</strong> White to play.
-    </div>
+    <div class="status" id="status"><strong>Your turn.</strong></div>
 
     <div class="controls">
         <button class="primary" onclick="newGame()">New Game</button>
@@ -438,7 +445,7 @@ select { min-width:125px; padding:8px; }
         <div class="setting-row">
             <span>Play as</span>
             <select id="playerColor" onchange="changeColor()">
-                <option value="w" selected>White</option>
+                <option value="w" selected="">White</option>
                 <option value="b">Black</option>
             </select>
         </div>
@@ -448,23 +455,21 @@ select { min-width:125px; padding:8px; }
             <select id="difficulty">
                 <option value="1">Beginner</option>
                 <option value="2">Easy</option>
-                <option value="3" selected>Medium</option>
+                <option value="3" selected="">Medium</option>
                 <option value="4">Hard</option>
             </select>
         </div>
     </div>
 
     <div class="panel-heading">Move History</div>
-    <div class="move-list" id="moveList">
-        <div style="color:#a0a5af;font-size:13px;padding:10px">
-            Moves will appear here.
-        </div>
-    </div>
+    <div class="move-list" id="moveList"><div style="color:#a0a5af;font-size:13px;padding:10px">Moves will appear here.</div></div>
 
     <div class="help">
         <strong>Controls</strong><br>
         Click or drag a piece to move it.<br>
         Right-click and drag to draw an arrow.<br>
+        Pieces slide smoothly when moved by clicking or by the AI.<br>
+        Dragged pieces snap into place when released.<br>
         Queue a premove while the AI is thinking.<br>
         Knight premoves use the normal L-shaped movement.<br>
         Use Pause to stop the game.
@@ -508,8 +513,6 @@ let premove = null;
 let dragSource = null;
 let arrowStart = null;
 let arrows = [];
-let aiTimer = null;
-let searchToken = 0;
 
 const board = document.getElementById("board");
 const statusBox = document.getElementById("status");
@@ -553,6 +556,7 @@ function renderBoard() {
                 ((file + rank) % 2 === 0 ? "light" : "dark");
 
             cell.dataset.square = square;
+            cell.draggable = !!piece;
 
             if (selectedSquare === square) {
                 cell.classList.add("selected");
@@ -714,10 +718,11 @@ function handleDrop(from, to) {
 
     if (!isHumanTurn()) return;
 
-    attemptMove(from, to);
+    // Dragging already visually moves the piece; snap it into place on release.
+    attemptMove(from, to, null, false);
 }
 
-function attemptMove(from, to, promotion = "q") {
+function attemptMove(from, to, promotion = null, animate = true) {
     if (paused || gameFinished || !isHumanTurn()) return;
 
     const piece = game.get(from);
@@ -740,7 +745,7 @@ function attemptMove(from, to, promotion = "q") {
         });
 
         if (!move) return;
-        afterMove(move);
+        afterMove(move, animate);
     } catch (error) {
         // Illegal moves are ignored.
     }
@@ -771,9 +776,66 @@ function showPromotion(from, to) {
     overlay.classList.add("show");
 }
 
+/* PIECE MOVEMENT ANIMATION */
+
+function prepareMoveAnimation(move) {
+    const fromCell = board.querySelector(`[data-square="${move.from}"]`);
+    const toCell = board.querySelector(`[data-square="${move.to}"]`);
+    const sourceImage = fromCell?.querySelector("img");
+    if (!fromCell || !toCell || !sourceImage) return null;
+
+    const wrapRect = document.querySelector(".board-wrap").getBoundingClientRect();
+    const sourceRect = sourceImage.getBoundingClientRect();
+    const sourceCellRect = fromCell.getBoundingClientRect();
+    const targetRect = toCell.getBoundingClientRect();
+
+    return {
+        image: sourceImage.cloneNode(true),
+        left: sourceRect.left - wrapRect.left,
+        top: sourceRect.top - wrapRect.top,
+        width: sourceRect.width,
+        height: sourceRect.height,
+        dx: targetRect.left - sourceCellRect.left,
+        dy: targetRect.top - sourceCellRect.top,
+        to: move.to
+    };
+}
+
+function runMoveAnimation(data) {
+    if (!data) return;
+
+    const wrap = document.querySelector(".board-wrap");
+    const destination = board.querySelector(`[data-square="${data.to}"] img`);
+    const mover = data.image;
+
+    mover.className = "moving-piece";
+    mover.draggable = false;
+    mover.style.left = data.left + "px";
+    mover.style.top = data.top + "px";
+    mover.style.width = data.width + "px";
+    mover.style.height = data.height + "px";
+    mover.style.transform = "translate(0,0)";
+    wrap.appendChild(mover);
+
+    if (destination) destination.style.opacity = "0";
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            mover.style.transform = `translate(${data.dx}px, ${data.dy}px)`;
+        });
+    });
+
+    setTimeout(() => {
+        mover.remove();
+        if (destination?.isConnected) destination.style.opacity = "";
+    }, 310);
+}
+
 /* AFTER MOVE */
 
-function afterMove(move) {
+function afterMove(move, animate = true) {
+    const animation = animate ? prepareMoveAnimation(move) : null;
+
     lastMove = {
         from:move.from,
         to:move.to
@@ -783,6 +845,7 @@ function afterMove(move) {
     legalTargets = [];
 
     renderBoard();
+    if (animation) runMoveAnimation(animation);
     renderHistory();
     updateStatus();
 
@@ -875,8 +938,7 @@ function finishGame() {
     thinking = false;
     premove = null;
 
-    clearTimeout(aiTimer);
-    searchToken++;
+    stopAIWorker();
 
     if (game.isCheckmate()) {
         const winner = game.turn() === playerColor
@@ -904,6 +966,12 @@ function togglePause() {
 
     paused = !paused;
 
+    // Stop an in-progress search while paused; it will restart on Resume.
+    if (paused && thinking) {
+        stopAIWorker();
+        thinking = false;
+    }
+
     document.getElementById("pauseOverlay")
         .classList.toggle("show", paused);
 
@@ -920,8 +988,7 @@ function togglePause() {
 /* NEW GAME */
 
 function newGame() {
-    searchToken++;
-    clearTimeout(aiTimer);
+    stopAIWorker();
 
     game = new Chess();
     paused = false;
@@ -952,8 +1019,7 @@ function newGame() {
 function undoMove() {
     if (paused) return;
 
-    searchToken++;
-    clearTimeout(aiTimer);
+    stopAIWorker();
 
     thinking = false;
     premove = null;
@@ -998,159 +1064,184 @@ function changeColor() {
     newGame();
 }
 
-/* AI EVALUATION */
+/* AI ENGINE — SEARCH RUNS IN A WEB WORKER, NOT ON THE BOARD THREAD */
 
-const VALUES = {
-    p:100,
-    n:320,
-    b:335,
-    r:500,
-    q:900,
-    k:20000
-};
+let aiWorker = null;
+let aiRequestId = 0;
+let aiStartedAt = 0;
 
-function evaluatePosition() {
-    if (game.isCheckmate()) {
-        return game.turn() === "w" ? -100000 : 100000;
-    }
+function createAIWorker() {
+    const workerSource = `
+        import { Chess } from "https://esm.sh/chess.js@1.4.0";
 
-    if (game.isDraw()) return 0;
+        const VALUES = {p:100,n:320,b:335,r:500,q:900,k:20000};
 
-    let score = 0;
-    const files = "abcdefgh";
+        function evaluate(game) {
+            if (game.isCheckmate()) return game.turn() === "w" ? -100000 : 100000;
+            if (game.isDraw()) return 0;
 
-    for (let rank = 0; rank < 8; rank++) {
-        for (let file = 0; file < 8; file++) {
-            const square = files[file] + (8 - rank);
-            const piece = game.get(square);
+            const board = game.board();
+            let score = 0;
+            for (let r = 0; r < 8; r++) {
+                for (let f = 0; f < 8; f++) {
+                    const piece = board[r][f];
+                    if (!piece) continue;
+                    const sign = piece.color === "w" ? 1 : -1;
+                    const center = 7 - (Math.abs(3.5-f) + Math.abs(3.5-r));
+                    let value = VALUES[piece.type];
 
-            if (!piece) continue;
-
-            const sign = piece.color === "w" ? 1 : -1;
-            const centerDistance =
-                Math.abs(3.5 - file) + Math.abs(3.5 - rank);
-
-            let value = VALUES[piece.type];
-
-            if (piece.type === "n" || piece.type === "b") {
-                value += Math.round((7 - centerDistance) * 5);
+                    if (piece.type === "n" || piece.type === "b") value += center * 5;
+                    if (piece.type === "p") {
+                        const advance = piece.color === "w" ? 6-r : r-1;
+                        value += advance * 9;
+                        if (f >= 2 && f <= 5) value += 5;
+                    }
+                    if (piece.type === "q" || piece.type === "r") value += center * 1.5;
+                    if (piece.type === "k" && game.history().length < 24) value -= center * 4;
+                    score += value * sign;
+                }
             }
 
-            if (piece.type === "p") {
-                const advancement = piece.color === "w"
-                    ? 6 - rank
-                    : rank - 1;
-
-                value += advancement * 8;
+            // Small development reward discourages repeating the same passive opening.
+            const history = game.history({verbose:true});
+            for (const m of history.slice(0, 12)) {
+                if (m.piece === "n" || m.piece === "b") {
+                    const homeRank = m.color === "w" ? "1" : "8";
+                    if (m.from[1] === homeRank && m.to[1] !== homeRank) {
+                        score += m.color === "w" ? 7 : -7;
+                    }
+                }
             }
-
-            score += value * sign;
+            if (game.isCheck()) score += game.turn() === "w" ? -28 : 28;
+            return score;
         }
-    }
 
-    if (game.isCheck()) {
-        score += game.turn() === "w" ? -25 : 25;
-    }
+        function moveOrder(moves) {
+            return moves.sort((a,b) => {
+                const value = m => {
+                    let n = 0;
+                    if (m.captured) n += VALUES[m.captured] * 10 - VALUES[m.piece];
+                    if (m.promotion) n += VALUES[m.promotion];
+                    if (m.san.includes("+")) n += 35;
+                    if (m.san.includes("#")) n += 100000;
+                    return n;
+                };
+                return value(b) - value(a);
+            });
+        }
 
-    return score;
-}
+        function search(game, depth, alpha, beta) {
+            if (depth <= 0 || game.isGameOver()) return evaluate(game);
+            const maximizing = game.turn() === "w";
+            const moves = moveOrder(game.moves({verbose:true}));
+            if (!moves.length) return evaluate(game);
 
-function orderMoves(moves) {
-    return moves.sort((a,b) => {
-        const score = move => {
-            let result = 0;
-
-            if (move.captured) {
-                result += VALUES[move.captured] * 10 -
-                    VALUES[move.piece];
+            if (maximizing) {
+                let best = -Infinity;
+                for (const move of moves) {
+                    game.move(move);
+                    const score = search(game, depth-1, alpha, beta);
+                    game.undo();
+                    if (score > best) best = score;
+                    if (best > alpha) alpha = best;
+                    if (beta <= alpha) break;
+                }
+                return best;
+            } else {
+                let best = Infinity;
+                for (const move of moves) {
+                    game.move(move);
+                    const score = search(game, depth-1, alpha, beta);
+                    game.undo();
+                    if (score < best) best = score;
+                    if (best < beta) beta = best;
+                    if (beta <= alpha) break;
+                }
+                return best;
             }
+        }
 
-            if (move.promotion) {
-                result += VALUES[move.promotion];
+        self.onmessage = event => {
+            const {id, fen, depth} = event.data;
+            try {
+                const game = new Chess(fen);
+                const moves = moveOrder(game.moves({verbose:true}));
+                if (!moves.length) {
+                    self.postMessage({id, move:null});
+                    return;
+                }
+                const maximizing = game.turn() === "w";
+                const scored = [];
+                for (const move of moves) {
+                    game.move(move);
+                    const score = search(game, depth-1, -Infinity, Infinity);
+                    game.undo();
+                    scored.push({
+                        move:{from:move.from,to:move.to,promotion:move.promotion || "q"},
+                        score
+                    });
+                }
+
+                scored.sort((a,b) => maximizing ? b.score-a.score : a.score-b.score);
+                const bestScore = scored[0].score;
+                // Pick among genuinely close moves to avoid an identical opening every game.
+                const alternatives = scored.filter(item =>
+                    maximizing ? item.score >= bestScore-38 : item.score <= bestScore+38
+                );
+                const chosen = alternatives[Math.floor(Math.random()*Math.min(alternatives.length, 4))];
+                self.postMessage({id, move:chosen.move});
+            } catch (error) {
+                self.postMessage({id, move:null, error:String(error)});
             }
-
-            if (move.san && move.san.includes("+")) {
-                result += 40;
-            }
-
-            return result;
         };
+    `;
 
-        return score(b) - score(a);
+    const blob = new Blob([workerSource], {type:"text/javascript"});
+    const url = URL.createObjectURL(blob);
+    const worker = new Worker(url, {type:"module"});
+    worker.addEventListener("message", event => {
+        const data = event.data;
+        if (data.id !== aiRequestId) return;
+
+        const token = data.id;
+        const waitMore = Math.max(0, 850 - (Date.now() - aiStartedAt));
+        setTimeout(() => {
+            if (token !== aiRequestId || paused || gameFinished) return;
+            if (!data.move) {
+                thinking = false;
+                updateStatus();
+                return;
+            }
+
+            try {
+                const move = game.move(data.move);
+                thinking = false;
+                if (move) afterMove(move, true);
+                else updateStatus();
+            } catch (error) {
+                thinking = false;
+                updateStatus();
+            }
+        }, waitMore);
     });
-}
-
-function minimax(depth, alpha, beta) {
-    if (depth === 0 || game.isGameOver()) {
-        return evaluatePosition();
-    }
-
-    const maximizing = game.turn() === "w";
-    const moves = orderMoves(game.moves({verbose:true}));
-
-    if (maximizing) {
-        let best = -Infinity;
-
-        for (const move of moves) {
-            game.move(move);
-            const score = minimax(depth - 1, alpha, beta);
-            game.undo();
-
-            best = Math.max(best, score);
-            alpha = Math.max(alpha, best);
-
-            if (beta <= alpha) break;
+    worker.addEventListener("error", error => {
+        console.error("Chess AI worker error:", error);
+        if (thinking && !paused && !gameFinished) {
+            thinking = false;
+            updateStatus();
         }
-
-        return best;
-    }
-
-    let best = Infinity;
-
-    for (const move of moves) {
-        game.move(move);
-        const score = minimax(depth - 1, alpha, beta);
-        game.undo();
-
-        best = Math.min(best, score);
-        beta = Math.min(beta, best);
-
-        if (beta <= alpha) break;
-    }
-
-    return best;
+    });
+    return {worker, url};
 }
 
-function findBestMove(depth) {
-    const moves = orderMoves(game.moves({verbose:true}));
-
-    if (!moves.length) return null;
-
-    let bestMove = null;
-    let bestScore = game.turn() === "w" ? -Infinity : Infinity;
-
-    for (const move of moves) {
-        game.move(move);
-        const score = minimax(depth - 1, -Infinity, Infinity);
-        game.undo();
-
-        if (game.turn() === "w") {
-            if (score > bestScore) {
-                bestScore = score;
-                bestMove = move;
-            }
-        } else {
-            if (score < bestScore) {
-                bestScore = score;
-                bestMove = move;
-            }
-        }
+function stopAIWorker() {
+    aiRequestId++;
+    if (aiWorker) {
+        aiWorker.worker.terminate();
+        URL.revokeObjectURL(aiWorker.url);
+        aiWorker = null;
     }
-
-    return bestMove;
 }
-
-/* AI TURN */
 
 function startAI() {
     if (paused || gameFinished || thinking || isHumanTurn()) return;
@@ -1158,39 +1249,24 @@ function startAI() {
     thinking = true;
     updateStatus();
 
-    const token = ++searchToken;
-    const depth = Number(document.getElementById("difficulty").value);
+    stopAIWorker();
+    const requestId = aiRequestId;
+    const depthSetting = Number(document.getElementById("difficulty").value);
+    const depth = depthSetting === 1 ? 2 : depthSetting === 2 ? 3 : depthSetting === 3 ? 3 : 4;
+    aiStartedAt = Date.now();
 
-    aiTimer = setTimeout(() => {
-        if (token !== searchToken || paused || gameFinished) return;
-
-        const bestMove = findBestMove(depth);
-
-        if (token !== searchToken || !bestMove) {
-            thinking = false;
-            updateStatus();
-            return;
-        }
-
-        try {
-            const move = game.move({
-                from:bestMove.from,
-                to:bestMove.to,
-                promotion:bestMove.promotion || "q"
-            });
-
-            thinking = false;
-
-            if (move) {
-                afterMove(move);
-            } else {
-                updateStatus();
-            }
-        } catch (error) {
-            thinking = false;
-            updateStatus();
-        }
-    }, 150);
+    try {
+        aiWorker = createAIWorker();
+        aiWorker.worker.postMessage({
+            id:requestId,
+            fen:game.fen(),
+            depth
+        });
+    } catch (error) {
+        console.error("Could not start AI worker:", error);
+        thinking = false;
+        updateStatus();
+    }
 }
 
 /* PREMOVES */
@@ -1410,5 +1486,5 @@ renderHistory();
 updateStatus();
 
 </script>
-</body>
-</html>
+
+</body></html>
